@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ITrainer extends JpaRepository<Trainer, Integer> {
-    @Query("SELECT t.firstName ||' ' || t.lastName FROM Trainer t WHERE t.firstName = :name")
+    @Query("SELECT t.firstName ||' '|| t.lastName FROM Trainer t WHERE t.firstName = :name")
     public String byName(@Param("name")String name);
 }
