@@ -21,7 +21,7 @@ public class ClientController {
     @PostMapping("createClient")
     public Client createClient(@RequestBody Client client){
         client.setFirstName(client.getFirstName());
-        client.setLastName(client.getFirstName());
+        client.setLastName(client.getLastName());
         client.setEmail(client.getEmail());
         client.setWeight(client.getWeight());
         client.setAge(client.getAge());
@@ -29,11 +29,11 @@ public class ClientController {
         return iClient.save(client);
     }
 
-    @GetMapping("client/{name}")
-    public String clientName(@PathVariable(value = "name")String name){ return iClient.byName(name);}
-
+    @GetMapping("client/byName/{name}")
+    public String clientName(@PathVariable(value = "name")String name){
+        return iClient.byName(name);}
     @PutMapping("editClient/{id}")
-    public ResponseEntity<Client> createClient(@PathVariable(value = "id")Integer id, @RequestBody Client clientUpdate){
+    public ResponseEntity<Client> editClient(@PathVariable(value = "id")Integer id, @RequestBody Client clientUpdate){
         Optional<Client> client = iClient.findById(id);
         client.get().setFirstName(clientUpdate.getFirstName());
         client.get().setLastName(clientUpdate.getLastName());
@@ -44,6 +44,15 @@ public class ClientController {
         Client updateClient = iClient.save(client.get());
 
         return ResponseEntity.ok(updateClient);
+    }
+    @DeleteMapping("deleteClient/{id}")
+    public ResponseEntity<?> deleteClient(@PathVariable(value = "id")Integer id){
+        Optional<Client> client = iClient.findById(id);
+        if (client.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        iClient.deleteById(id);
+        return ResponseEntity.ok(client.get());
     }
 
 }
