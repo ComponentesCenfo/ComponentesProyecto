@@ -13,10 +13,6 @@ public class ProyectoComponentesApplication {
         SpringApplication.run(ProyectoComponentesApplication.class, args);
     }
 
-    @GetMapping
-    public String hello(){
-        return "Hello world";
-    }
 
 
 }
