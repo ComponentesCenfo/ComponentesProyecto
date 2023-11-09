@@ -16,9 +16,9 @@ public class Client {
         private String lastName;
         @Column(nullable = false)
         private String email;
-        @Column(nullable = false)
+        @Column(nullable = true)
         private Integer phone;
-        @Column(nullable = false)
+        @Column(nullable = true)
         private Float weight;
         @Column(nullable = false)
         private Integer age;
