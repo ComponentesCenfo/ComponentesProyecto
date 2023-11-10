@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
     @Autowired
     IClient iClient;
@@ -25,7 +26,7 @@ public class ClientController {
         client.setEmail(client.getEmail());
         client.setWeight(client.getWeight());
         client.setAge(client.getAge());
-        client.setSex(client.isSex());
+        client.setSex(client.getSex());
         return iClient.save(client);
     }
 
@@ -40,7 +41,7 @@ public class ClientController {
         client.get().setEmail(clientUpdate.getEmail());
         client.get().setWeight(clientUpdate.getWeight());
         client.get().setAge(clientUpdate.getAge());
-        client.get().setSex(clientUpdate.isSex());
+        client.get().setSex(clientUpdate.getSex());
         Client updateClient = iClient.save(client.get());
 
         return ResponseEntity.ok(updateClient);
