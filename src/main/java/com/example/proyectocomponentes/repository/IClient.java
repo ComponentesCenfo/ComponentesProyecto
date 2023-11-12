@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface IClient extends JpaRepository<Client, Integer> {
     @Query("SELECT t.firstName ||' '|| t.lastName FROM Client t WHERE t.firstName = :name")
     public String byName(@Param("name")String name);
+
+    public boolean existsByEmail(String email);
 }

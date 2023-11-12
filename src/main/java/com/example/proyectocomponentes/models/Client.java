@@ -28,6 +28,7 @@ public class Client {
 
         @Column(nullable = false)
         private Integer age;
+
         @Column(nullable = true)
         /*Booleno porque en este caso solo hay dos sexos(hombre o mujer), pero la persona puede decidir no incluir su sexo si no lo quiere hacer*/
         private String sex;

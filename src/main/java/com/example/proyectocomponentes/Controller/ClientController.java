@@ -1,5 +1,6 @@
 package com.example.proyectocomponentes.Controller;
 
+import com.example.proyectocomponentes.Exceptions.CustomException;
 import com.example.proyectocomponentes.models.Client;
 import com.example.proyectocomponentes.repository.IClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class ClientController {
 
     @PostMapping("createClient")
     public Client createClient(@RequestBody Client client){
+        if (iClient.existsByEmail(client.getEmail())) {
+            throw new CustomException("El email ya está registrado.");
+        }
         client.setFirstName(client.getFirstName());
         client.setLastName(client.getLastName());
         client.setEmail(client.getEmail());
