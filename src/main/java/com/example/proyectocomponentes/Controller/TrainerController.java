@@ -1,5 +1,6 @@
 package com.example.proyectocomponentes.Controller;
 
+import com.example.proyectocomponentes.models.Client;
 import com.example.proyectocomponentes.models.Trainer;
 import com.example.proyectocomponentes.repository.ITrainer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,11 @@ import java.util.Optional;
 public class TrainerController {
     @Autowired
     ITrainer iTrainer;
+
+    @GetMapping("getTrainerByEmail/{email}")
+    public Trainer getTrainerByEmail(String email){
+        return iTrainer.findTrainerByEmail(email);
+    }
 
     @GetMapping("allTrainers")
     public List<Trainer> getAllTrainers(){
