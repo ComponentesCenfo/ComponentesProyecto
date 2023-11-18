@@ -4,8 +4,13 @@ import com.example.proyectocomponentes.models.Trainer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ITrainer extends JpaRepository<Trainer, Integer> {
     @Query("SELECT t.firstName ||' '|| t.lastName FROM Trainer t WHERE t.firstName = :name")
     public String byName(@Param("name")String name);
+
+    @Query("SELECT Trainer FROM Trainer u WHERE u.email = :email")
+    Trainer findTrainerByEmail(@Param("email") String email);
 }

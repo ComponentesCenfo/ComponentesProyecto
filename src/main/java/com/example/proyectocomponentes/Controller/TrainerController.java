@@ -1,5 +1,6 @@
 package com.example.proyectocomponentes.Controller;
 
+import com.example.proyectocomponentes.models.Client;
 import com.example.proyectocomponentes.models.Trainer;
 import com.example.proyectocomponentes.repository.ITrainer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TrainerController {
     @Autowired
     ITrainer iTrainer;
+
+    @GetMapping("getTrainerByEmail/{email}")
+    public Trainer getTrainerByEmail(String email){
+        return iTrainer.findTrainerByEmail(email);
+    }
 
     @GetMapping("allTrainers")
     public List<Trainer> getAllTrainers(){
@@ -23,19 +30,19 @@ public class TrainerController {
     @PostMapping("createTrainer")
     public Trainer createTrainer(@RequestBody Trainer trainer){
         trainer.setFirstName(trainer.getFirstName());
-        trainer.setLastName(trainer.getFirstName());
+        trainer.setLastName(trainer.getLastName());
         trainer.setEmail(trainer.getEmail());
         trainer.setPhone(trainer.getPhone());
         return iTrainer.save(trainer);
     }
 
-    @GetMapping("trainer/{name}")
+    @GetMapping("/trainer/byName/{name}")
     public String trainerName(@PathVariable(value = "name")String name){
         return iTrainer.byName(name);
     }
 
     @PutMapping("editTrainer/{id}")
-    public ResponseEntity<Trainer> createTrainer(@PathVariable(value = "id")Integer id, @RequestBody Trainer trainerUpdate){
+    public ResponseEntity<Trainer> editTrainer(@PathVariable(value = "id")Integer id, @RequestBody Trainer trainerUpdate){
         Optional<Trainer> trainer = iTrainer.findById(id);
         trainer.get().setFirstName(trainerUpdate.getFirstName());
         trainer.get().setLastName(trainerUpdate.getLastName());
@@ -46,4 +53,13 @@ public class TrainerController {
         return ResponseEntity.ok(updateTrainer);
     }
 
+    @DeleteMapping("deleteTrainer/{id}")
+    public ResponseEntity<Trainer> deleteTrainer(@PathVariable(value = "id")Integer id){
+        Optional<Trainer> trainer = iTrainer.findById(id);
+        if (trainer.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        iTrainer.deleteById(id);
+        return ResponseEntity.ok(trainer.get());
+    }
 }
