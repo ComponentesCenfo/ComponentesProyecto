@@ -18,8 +18,13 @@ public class ClientController {
     IClient iClient;
 
     @PostMapping("getClientByEmail")
-    public Client getClientByEmail(@RequestBody String email){
-        return iClient.findClientByEmail(email);
+    public ResponseEntity<Client> getClientByEmail(@RequestBody String email){
+        Client client = iClient.findClientByEmail(email);
+        if(client != null){
+            return ResponseEntity.ok(client);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 

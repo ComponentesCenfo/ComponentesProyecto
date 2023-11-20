@@ -13,6 +13,5 @@ public interface IClient extends JpaRepository<Client, Integer> {
 
     public boolean existsByEmail(String email);
 
-    @Query("SELECT u FROM Client u WHERE u.email = :email")
-    Client findClientByEmail(@Param("email") String email);
+    public Client findClientByEmail(String email);
 }

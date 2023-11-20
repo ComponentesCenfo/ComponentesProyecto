@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ITrainer extends JpaRepository<Trainer, Integer> {
     @Query("SELECT t.firstName ||' '|| t.lastName FROM Trainer t WHERE t.firstName = :name")
-    public String byName(@Param("name")String name);
+    String byName(@Param("name")String name);
 
-    @Query("SELECT Trainer FROM Trainer u WHERE u.email = :email")
-    Trainer findTrainerByEmail(@Param("email") String email);
+    Trainer findByEmail(String email);
 }
