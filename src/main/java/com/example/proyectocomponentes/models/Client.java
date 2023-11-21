@@ -1,7 +1,10 @@
 package com.example.proyectocomponentes.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -39,5 +42,7 @@ public class Client {
         @Column(nullable = false)
         private String password;
 
+        @OneToOne(mappedBy = "client_id")
+        private TrainingPlan trainingPlans;
 
 }

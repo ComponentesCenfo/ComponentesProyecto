@@ -17,4 +17,6 @@ public class Trainer {
     private String password;
     @Column(nullable = false)
     private Integer phone;
+    @OneToOne(mappedBy = "trainer_id")
+    private TrainingPlan trainingPlans;
 }
