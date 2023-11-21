@@ -3,6 +3,7 @@ package com.example.proyectocomponentes.Controller;
 import com.example.proyectocomponentes.models.Trainer;
 import com.example.proyectocomponentes.repository.ITrainer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,17 @@ import java.util.Optional;
 public class TrainerController {
     @Autowired
     ITrainer iTrainer;
+
+    @PostMapping("getTrainerByEmail")
+    public ResponseEntity<Trainer> getTrainerByEmail(@RequestBody String email){
+        Trainer trainer = iTrainer.findByEmail(email);
+        if(trainer != null){
+            return ResponseEntity.ok(trainer);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @GetMapping("allTrainers")
     public List<Trainer> getAllTrainers(){

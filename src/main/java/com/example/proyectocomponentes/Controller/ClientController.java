@@ -17,6 +17,17 @@ public class ClientController {
     @Autowired
     IClient iClient;
 
+    @PostMapping("getClientByEmail")
+    public ResponseEntity<Client> getClientByEmail(@RequestBody String email){
+        Client client = iClient.findClientByEmail(email);
+        if(client != null){
+            return ResponseEntity.ok(client);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @GetMapping("allClients")
     public List<Client> getAllClients(){ return iClient.findAll();}
 

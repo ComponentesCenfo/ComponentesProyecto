@@ -26,11 +26,18 @@ public class Client {
         @Column(nullable = true)
         private Float weight;
 
+        @Column(nullable = true)
+        private Float height;
+
         @Column(nullable = false)
         private Integer age;
 
         @Column(nullable = true)
         /*Booleno porque en este caso solo hay dos sexos(hombre o mujer), pero la persona puede decidir no incluir su sexo si no lo quiere hacer*/
         private String sex;
+
+        @Column(nullable = false)
+        private String password;
+
 
 }
