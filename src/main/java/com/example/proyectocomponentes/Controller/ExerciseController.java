@@ -24,10 +24,7 @@ public class ExerciseController {
     @PostMapping("createExercise")
     public Exercise createExercise(@RequestBody Exercise exercise){
         exercise.setName(exercise.getName());
-        exercise.setSets(exercise.getSets());
-        exercise.setTime(exercise.getTime());
-        exercise.setRepetitions(exercise.getRepetitions());
-        exercise.setObjectives(exercise.getObjectives());
+        exercise.setMuscleGroup(exercise.getMuscleGroup());
         return iExercise.save(exercise);
     }
 
@@ -39,10 +36,7 @@ public class ExerciseController {
     public ResponseEntity<Exercise> editExercise(@PathVariable(value = "id")Integer id, @RequestBody Exercise exerciseUpdate){
         Optional<Exercise> exercise = iExercise.findById(id);
         exercise.get().setName(exerciseUpdate.getName());
-        exercise.get().setRepetitions(exerciseUpdate.getRepetitions());
-        exercise.get().setSets(exerciseUpdate.getSets());
-        exercise.get().setTime(exerciseUpdate.getTime());
-        exercise.get().setObjectives(exerciseUpdate.getObjectives());
+        exercise.get().setMuscleGroup(exerciseUpdate.getMuscleGroup());
         Exercise updateExercise = iExercise.save(exercise.get());
         return ResponseEntity.ok(updateExercise);
     }
