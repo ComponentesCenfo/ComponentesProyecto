@@ -22,5 +22,4 @@ public class Exercise {
     @OneToOne(mappedBy = "exercise",cascade = CascadeType.ALL)
     private ExerciseCriteria exerciseCriteria;
 
-
 }
