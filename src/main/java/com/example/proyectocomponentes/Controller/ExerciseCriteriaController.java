@@ -16,8 +16,11 @@ public class ExerciseCriteriaController {
     }
     @PostMapping("createExerciseCriteria")
     public ExerciseCriteria createExercise(@RequestBody ExerciseCriteria exerciseCriteria){
+        System.out.println(exerciseCriteria);
+        exerciseCriteria.setExercise(exerciseCriteria.getExercise());
         exerciseCriteria.setRepetitions(exerciseCriteria.getRepetitions());
         exerciseCriteria.setSeries(exerciseCriteria.getSeries());
+        exerciseCriteria.setTrainingPlan(exerciseCriteria.getTrainingPlan());
         return iExerciseCriteria.save(exerciseCriteria);
     }
     @DeleteMapping("deleteExerciseCriteria/{id}")

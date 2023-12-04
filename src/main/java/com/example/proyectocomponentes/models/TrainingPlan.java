@@ -30,6 +30,6 @@ public class TrainingPlan {
     @JsonBackReference("trainerReference")
     private Trainer trainer;
 
-    @OneToMany(mappedBy = "trainingPlan",cascade = CascadeType.ALL)
-    private List<ExerciseCriteria> exerciseList;
+    @OneToOne(mappedBy = "trainingPlan",cascade = CascadeType.ALL)
+    private ExerciseCriteria exerciseCriteria;
 }

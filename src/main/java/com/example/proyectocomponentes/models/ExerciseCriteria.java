@@ -28,8 +28,9 @@ public class ExerciseCriteria {
     @JsonBackReference("exerciseReference")
     private Exercise exercise;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="trainingPlan_id")
+    @JsonBackReference("trainingPlanReference")
     private TrainingPlan trainingPlan;
 
 }

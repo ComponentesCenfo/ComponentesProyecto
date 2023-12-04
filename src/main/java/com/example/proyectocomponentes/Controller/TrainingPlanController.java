@@ -27,7 +27,6 @@ public class TrainingPlanController {
         try{
             trainingPlan.setStartDate(trainingPlan.getStartDate());
             trainingPlan.setEndDate(trainingPlan.getEndDate());
-            trainingPlan.setExerciseList(trainingPlan.getExerciseList());
             trainingPlan.setClient(trainingPlan.getClient());
             trainingPlan.setTrainer(trainingPlan.getTrainer());
             iTrainingPlan.save(trainingPlan);
