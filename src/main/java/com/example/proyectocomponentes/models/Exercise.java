@@ -19,7 +19,5 @@ public class Exercise {
     @Column(nullable = false)
     private String muscleGroup;
 
-    @OneToOne(mappedBy = "exercise",cascade = CascadeType.ALL)
-    private ExerciseCriteria exerciseCriteria;
 
 }
