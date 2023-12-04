@@ -1,6 +1,7 @@
 package com.example.proyectocomponentes.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -42,7 +43,8 @@ public class Client {
         @Column(nullable = false)
         private String password;
 
-        @OneToOne(mappedBy = "client_id")
-        private TrainingPlan trainingPlans;
+        @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+        @JsonManagedReference("clientReference")
+        private List<TrainingPlan> trainingPlans;
 
 }

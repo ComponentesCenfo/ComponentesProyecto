@@ -20,15 +20,16 @@ public class TrainingPlan {
 
     private Date endDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
-    private Client client_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    @JsonBackReference("clientReference")
+    private Client client;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "trainer_id", referencedColumnName = "id")
-    private Trainer trainer_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trainer_id")
+    @JsonBackReference("trainerReference")
+    private Trainer trainer;
 
-    @OneToMany(mappedBy = "trainingPlan",cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<Exercise> exerciseList;
+    @OneToOne(mappedBy = "trainingPlan",cascade = CascadeType.ALL)
+    private ExerciseCriteria exerciseCriteria;
 }

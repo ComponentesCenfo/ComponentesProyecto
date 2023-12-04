@@ -1,7 +1,11 @@
 package com.example.proyectocomponentes.models;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -17,5 +21,16 @@ public class ExerciseCriteria {
 
     @Column(nullable = false)
     private Integer series;
+
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exercise_id")
+    @JsonBackReference("exerciseReference")
+    private Exercise exercise;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="trainingPlan_id")
+    @JsonBackReference("trainingPlanReference")
+    private TrainingPlan trainingPlan;
 
 }

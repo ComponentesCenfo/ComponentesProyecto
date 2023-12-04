@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -26,7 +27,8 @@ public class TrainingPlanController {
         try{
             trainingPlan.setStartDate(trainingPlan.getStartDate());
             trainingPlan.setEndDate(trainingPlan.getEndDate());
-            trainingPlan.setExerciseList(trainingPlan.getExerciseList());
+            trainingPlan.setClient(trainingPlan.getClient());
+            trainingPlan.setTrainer(trainingPlan.getTrainer());
             iTrainingPlan.save(trainingPlan);
             Map<String, String> map = new HashMap<String, String>();
             map.put("actualizado", "Success");
@@ -39,12 +41,12 @@ public class TrainingPlanController {
     }
 
     @PostMapping("getTrainingPlan")
-    public ResponseEntity<Object> getTrainingPlanByUserId(Integer client_id){
+    public List<TrainingPlan> getTrainingPlanByUserId(@RequestBody Integer client_id){
         try{
-            iTrainingPlan.getTrainingPlanByUserId(client_id);
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("actualizado", "Success");
-            return ResponseEntity.ok(map);
+            System.out.println(client_id);
+            List<TrainingPlan> trainingPlans = iTrainingPlan.getTrainingPlanByUserId(client_id);
+
+            return trainingPlans;
         }catch (Exception e){
             e.printStackTrace();
             throw e;
@@ -66,9 +68,9 @@ public class TrainingPlanController {
     }
 
     @DeleteMapping("deleteTrainingPlan")
-    public ResponseEntity<Object> deletePlan(@PathVariable(value = "client_id")Integer client_id){
+    public ResponseEntity<Object> deletePlan(@PathVariable(value = "client")Integer client){
         try{
-            iTrainingPlan.deleteTrainingPlanByUserId(client_id);
+            iTrainingPlan.deleteTrainingPlanByUserId(client);
             Map<String, String> map = new HashMap<String, String>();
             map.put("Borrado", "Success");
             return ResponseEntity.ok(map);

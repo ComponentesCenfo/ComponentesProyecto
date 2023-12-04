@@ -1,9 +1,7 @@
 package com.example.proyectocomponentes.repository;
-
-import com.example.proyectocomponentes.models.Exercise;
+import com.example.proyectocomponentes.models.ExerciseCriteria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 @Repository
-public interface IExerciseCriteria extends JpaRepository<Exercise, Integer> {
+public interface IExerciseCriteria extends JpaRepository<ExerciseCriteria, Integer> {
 }
