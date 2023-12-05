@@ -1,6 +1,7 @@
 package com.example.proyectocomponentes.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class Client {
         private String email;
 
         @Column(nullable = true)
-        private Integer phone;
+        private Long phone;
 
         @Column(nullable = true)
         private Float weight;
@@ -43,8 +44,8 @@ public class Client {
         @Column(nullable = false)
         private String password;
 
+        @JsonIgnore
         @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-        @JsonManagedReference("clientReference")
         private List<TrainingPlan> trainingPlans;
 
 }
