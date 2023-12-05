@@ -16,6 +16,8 @@ public class TrainingPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long trainingPlan_id;
 
+    private LocalDate creationDate = LocalDate.now();
+
     private LocalDate startDate;
 
     private Date endDate;
@@ -30,6 +32,6 @@ public class TrainingPlan {
     @JsonBackReference("trainerReference")
     private Trainer trainer;
 
-    @OneToOne(mappedBy = "trainingPlan",cascade = CascadeType.ALL)
-    private ExerciseCriteria exerciseCriteria;
+    @OneToMany(mappedBy = "trainingPlan", cascade = CascadeType.ALL)
+    private List<ExerciseCriteria> exerciseCriterias;
 }

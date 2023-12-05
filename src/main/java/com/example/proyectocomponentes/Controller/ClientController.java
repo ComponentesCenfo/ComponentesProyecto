@@ -40,6 +40,7 @@ public class ClientController {
         client.setFirstName(client.getFirstName());
         client.setLastName(client.getLastName());
         client.setEmail(client.getEmail());
+        client.setPhone(client.getPhone());
         client.setWeight(client.getWeight());
         client.setAge(client.getAge());
         client.setSex(client.getSex());
