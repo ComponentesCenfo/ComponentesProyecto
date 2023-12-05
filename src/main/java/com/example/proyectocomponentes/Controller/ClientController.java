@@ -52,12 +52,15 @@ public class ClientController {
     @PutMapping("editClient/{id}")
     public ResponseEntity<Client> editClient(@PathVariable(value = "id")Integer id, @RequestBody Client clientUpdate){
         Optional<Client> client = iClient.findById(id);
+        System.out.println(clientUpdate);
         client.get().setFirstName(clientUpdate.getFirstName());
         client.get().setLastName(clientUpdate.getLastName());
         client.get().setEmail(clientUpdate.getEmail());
         client.get().setWeight(clientUpdate.getWeight());
         client.get().setAge(clientUpdate.getAge());
         client.get().setSex(clientUpdate.getSex());
+        client.get().setHeight(clientUpdate.getHeight());
+        client.get().setPhone(clientUpdate.getPhone());
         Client updateClient = iClient.save(client.get());
 
         return ResponseEntity.ok(updateClient);

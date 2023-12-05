@@ -25,7 +25,7 @@ public class Client {
         private String email;
 
         @Column(nullable = true)
-        private Integer phone;
+        private Long phone;
 
         @Column(nullable = true)
         private Float weight;
