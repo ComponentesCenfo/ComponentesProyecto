@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
@@ -30,9 +27,7 @@ public class TrainingPlanController {
             trainingPlan.setClient(trainingPlan.getClient());
             trainingPlan.setTrainer(trainingPlan.getTrainer());
             iTrainingPlan.save(trainingPlan);
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("actualizado", "Success");
-            return ResponseEntity.ok(map);
+            return ResponseEntity.ok(trainingPlan);
         }catch (Exception e){
             e.printStackTrace();
             throw e;
@@ -40,18 +35,15 @@ public class TrainingPlanController {
 
     }
 
-    @PostMapping("getTrainingPlan")
-    public List<TrainingPlan> getTrainingPlanByUserId(@RequestBody Integer client_id){
+    @GetMapping("getTrainingPlan")
+    public TrainingPlan getTrainingPlanByClientId(@RequestParam Integer client_id){
         try{
-            System.out.println(client_id);
-            List<TrainingPlan> trainingPlans = iTrainingPlan.getTrainingPlanByUserId(client_id);
-
-            return trainingPlans;
+            TrainingPlan nearestTrainingPlan = iTrainingPlan.findLatestTrainingPlanByClientId(client_id);
+            return nearestTrainingPlan;
         }catch (Exception e){
             e.printStackTrace();
             throw e;
         }
-
     }
 
     @PutMapping("editTrainingPlan")

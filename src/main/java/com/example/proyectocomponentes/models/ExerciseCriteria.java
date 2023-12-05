@@ -23,14 +23,13 @@ public class ExerciseCriteria {
     private Integer series;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "exercise_id")
-    @JsonBackReference("exerciseReference")
+    @ManyToOne
+    @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="trainingPlan_id")
-    @JsonBackReference("trainingPlanReference")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trainingPlan_id")
+    @JsonBackReference
     private TrainingPlan trainingPlan;
 
 }
