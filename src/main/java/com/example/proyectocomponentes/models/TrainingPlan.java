@@ -1,6 +1,5 @@
 package com.example.proyectocomponentes.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,20 +15,18 @@ public class TrainingPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long trainingPlan_id;
 
-    private LocalDate creationDate = LocalDate.now();
+    private Date creationDate;
 
     private LocalDate startDate;
 
-    private Date endDate;
+    private LocalDate endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
-    @JsonBackReference("clientReference")
     private Client client;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trainer_id")
-    @JsonBackReference("trainerReference")
     private Trainer trainer;
 
     @OneToMany(mappedBy = "trainingPlan", cascade = CascadeType.ALL)

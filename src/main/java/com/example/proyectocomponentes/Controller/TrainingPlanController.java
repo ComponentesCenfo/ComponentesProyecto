@@ -22,6 +22,7 @@ public class TrainingPlanController {
     @PostMapping("createTrainingPlan")
     public ResponseEntity<Object> createTrainingPlan(@RequestBody TrainingPlan trainingPlan){
         try{
+            trainingPlan.setCreationDate(Date.from(java.time.Instant.now()));
             trainingPlan.setStartDate(trainingPlan.getStartDate());
             trainingPlan.setEndDate(trainingPlan.getEndDate());
             trainingPlan.setClient(trainingPlan.getClient());
@@ -35,11 +36,32 @@ public class TrainingPlanController {
 
     }
 
-    @GetMapping("getTrainingPlan")
-    public TrainingPlan getTrainingPlanByClientId(@RequestParam Integer client_id){
+    @GetMapping("getLatestTrainingPlanByClientId")
+    public TrainingPlan getLatestTrainingPlanByClientId(@RequestParam Integer clientId){
         try{
-            TrainingPlan nearestTrainingPlan = iTrainingPlan.findLatestTrainingPlanByClientId(client_id);
+            TrainingPlan nearestTrainingPlan = iTrainingPlan.findLatestTrainingPlanByClientId(clientId);
             return nearestTrainingPlan;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @GetMapping("getAllTrainingPlanByClientId")
+    public List<TrainingPlan> getAllTrainingPlanByClientId(@RequestParam Integer clientId){
+        try{
+            List<TrainingPlan> trainingPlans = iTrainingPlan.findAllTrainingPlansByClientId(clientId);
+            return trainingPlans;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+    @GetMapping("getAllTrainingPlanByTrainerId")
+    public List<TrainingPlan> getAllTrainingPlanByTrainerId(@RequestParam Integer trainerId){
+        try{
+            List<TrainingPlan> trainingPlans = iTrainingPlan.findAllTrainingPlansByTrainerId(trainerId);
+            return trainingPlans;
         }catch (Exception e){
             e.printStackTrace();
             throw e;
@@ -49,6 +71,7 @@ public class TrainingPlanController {
     @PutMapping("editTrainingPlan")
     public ResponseEntity<Object> updateTrainingPlan(@RequestBody TrainingPlan u){
         try{
+            u.setCreationDate(u.getCreationDate());
             iTrainingPlan.save(u);
             Map<String, String> map = new HashMap<String, String>();
             map.put("actualizado", "Success");
@@ -60,9 +83,9 @@ public class TrainingPlanController {
     }
 
     @DeleteMapping("deleteTrainingPlan")
-    public ResponseEntity<Object> deletePlan(@PathVariable(value = "client")Integer client){
+    public ResponseEntity<Object> deletePlan(@PathVariable(value = "clientId")Integer clientId){
         try{
-            iTrainingPlan.deleteTrainingPlanByUserId(client);
+            iTrainingPlan.deleteTrainingPlanByClientId(clientId);
             Map<String, String> map = new HashMap<String, String>();
             map.put("Borrado", "Success");
             return ResponseEntity.ok(map);
