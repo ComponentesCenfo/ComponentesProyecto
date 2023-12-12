@@ -14,6 +14,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://skytech-proyecto-gym.s3-website-us-east-1.amazonaws.com")
 public class TrainingPlanController {
     @Autowired
     ITrainingPlan iTrainingPlan;

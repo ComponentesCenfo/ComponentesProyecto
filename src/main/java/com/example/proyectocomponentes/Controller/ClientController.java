@@ -14,6 +14,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://skytech-proyecto-gym.s3-website-us-east-1.amazonaws.com")
 public class ClientController {
     @Autowired
     IClient iClient;
