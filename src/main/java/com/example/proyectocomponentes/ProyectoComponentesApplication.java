@@ -20,7 +20,7 @@ public class ProyectoComponentesApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("*");
+                registry.addMapping("/**").allowedOrigins("http://skytech-proyecto-gym.s3-website-us-east-1.amazonaws.com").allowedMethods("*");
             }
         };
     }
