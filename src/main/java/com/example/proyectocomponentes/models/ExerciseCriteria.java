@@ -2,6 +2,9 @@ package com.example.proyectocomponentes.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,7 +17,7 @@ public class ExerciseCriteria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     private Integer repetitions;
@@ -27,8 +30,8 @@ public class ExerciseCriteria {
     @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trainingPlan_id")
+    @ManyToOne
+    @JoinColumn(name = "trainingPlan_id", nullable = false)
     @JsonBackReference
     private TrainingPlan trainingPlan;
 

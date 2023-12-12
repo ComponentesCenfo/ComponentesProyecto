@@ -1,5 +1,6 @@
 package com.example.proyectocomponentes.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class TrainingPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long trainingPlan_id;
+    private Integer trainingPlan_id;
 
     private Date creationDate;
 
@@ -21,11 +22,11 @@ public class TrainingPlan {
 
     private LocalDate endDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "trainer_id")
     private Trainer trainer;
 
