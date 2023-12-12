@@ -19,10 +19,11 @@ public class Trainer {
     private String lastName;
     @Column(nullable = false)
     private String email;
+
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
-    private Integer phone;
+    private Long phone;
 
     @JsonIgnore
     @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
