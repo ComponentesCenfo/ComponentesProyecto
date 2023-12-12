@@ -14,7 +14,6 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200")
 public class TrainingPlanController {
     @Autowired
     ITrainingPlan iTrainingPlan;
@@ -72,6 +71,10 @@ public class TrainingPlanController {
     public ResponseEntity<Object> updateTrainingPlan(@RequestBody TrainingPlan u){
         try{
             u.setCreationDate(u.getCreationDate());
+            u.setStartDate(u.getStartDate());
+            u.setEndDate(u.getEndDate());
+            u.setClient(u.getClient());
+            u.setTrainer(u.getTrainer());
             iTrainingPlan.save(u);
             Map<String, String> map = new HashMap<String, String>();
             map.put("actualizado", "Success");

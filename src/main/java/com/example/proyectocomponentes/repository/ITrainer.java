@@ -12,4 +12,7 @@ public interface ITrainer extends JpaRepository<Trainer, Integer> {
     String byName(@Param("name")String name);
 
     Trainer findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
 }
